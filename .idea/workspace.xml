@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="16da7ec9-df54-4cdd-9996-b09ab86c1b8d" name="Default" comment="" />
+    <list default="true" id="16da7ec9-df54-4cdd-9996-b09ab86c1b8d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ai.py" afterPath="$PROJECT_DIR$/ai.py" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,7 +13,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
@@ -24,26 +26,27 @@
       <file leaf-file-name="game.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/game.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
+            <state relative-caret-position="767">
               <caret line="118" column="0" lean-forward="true" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ai.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="ai.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ai.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
+            <state relative-caret-position="204">
+              <caret line="38" column="19" lean-forward="false" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
+                <element signature="e#134#926#0" expanded="false" />
                 <element signature="e#1010#2014#0" expanded="false" />
-                <element signature="e#2068#2353#0" expanded="false" />
-                <element signature="e#2401#2556#0" expanded="false" />
-                <element signature="e#2639#4071#0" expanded="false" />
-                <element signature="e#4191#4496#0" expanded="false" />
-                <element signature="e#4572#4721#0" expanded="false" />
+                <element signature="e#2068#2462#0" expanded="false" />
+                <element signature="e#2510#2665#0" expanded="false" />
+                <element signature="e#2748#4180#0" expanded="false" />
+                <element signature="e#4300#4605#0" expanded="false" />
+                <element signature="e#4681#4830#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -71,6 +74,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>main</find>
+      <find>getFitness</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -82,8 +86,8 @@
         <option value="$PROJECT_DIR$/problem.py" />
         <option value="$PROJECT_DIR$/human.py" />
         <option value="$PROJECT_DIR$/game.py" />
-        <option value="$PROJECT_DIR$/ai.py" />
         <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/ai.py" />
       </list>
     </option>
   </component>
@@ -215,34 +219,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ai.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-          <folding>
-            <element signature="e#1#12#0" expanded="true" />
-            <element signature="e#1010#2014#0" expanded="false" />
-            <element signature="e#2068#2353#0" expanded="false" />
-            <element signature="e#2401#2556#0" expanded="false" />
-            <element signature="e#2639#4071#0" expanded="false" />
-            <element signature="e#4191#4496#0" expanded="false" />
-            <element signature="e#4572#4721#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/human.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
           <caret line="11" column="12" lean-forward="true" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/game.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="118" column="0" lean-forward="true" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -252,6 +232,31 @@
         <state relative-caret-position="187">
           <caret line="11" column="26" lean-forward="true" selection-start-line="11" selection-start-column="26" selection-end-line="11" selection-end-column="26" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="767">
+          <caret line="118" column="0" lean-forward="true" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ai.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="38" column="19" lean-forward="false" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+          <folding>
+            <element signature="e#1#12#0" expanded="true" />
+            <element signature="e#134#926#0" expanded="false" />
+            <element signature="e#1010#2014#0" expanded="false" />
+            <element signature="e#2068#2462#0" expanded="false" />
+            <element signature="e#2510#2665#0" expanded="false" />
+            <element signature="e#2748#4180#0" expanded="false" />
+            <element signature="e#4300#4605#0" expanded="false" />
+            <element signature="e#4681#4830#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

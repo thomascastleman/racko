@@ -71,20 +71,18 @@ class AI(game.RackoGame):
                 return index
 
     def getFitness(self, num, index, rack):
-        fit = 0
-        if index - 1 >= 0:
-            if rack[index - 1] < num:
-                fit += 1
-        else:
-            fit += 1
+        after = rack[index - 1] if index - 1 >= 0 else num - 1
+        before = rack[index + 1] if index + 1 < len(rack) else num + 1
 
-        if index + 1 < len(rack):
-            if rack[index + 1] > num:
-                fit += 1
+        # 2 if completely in order
+        if num < after and num > before:
+            return 2
+        # 1 if partially in order
+        elif num < after or num > before:
+            return 1
+        # 0 if completely out of order
         else:
-            fit += 1
-
-        return fit
+            return 0
 
     def getIdealPos(self, num, rack):
         index = int(math.floor(len(rack) * (num / float(super(AI, self).getCardMax()))))
