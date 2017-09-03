@@ -34,7 +34,7 @@ class RackoGame(object):
             nums.remove(n)
 
         # deal cards to each rack
-        for i in range(0, 10):
+        for i in range(0, self.rackLength):
             self.p1Rack.append(self.mysteryStack.pop())
             self.p2Rack.append(self.mysteryStack.pop())
 
