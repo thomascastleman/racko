@@ -44,27 +44,19 @@ class RackoGame(object):
         # flip over first card in mystery stack to start
         self.discardStack.append(self.mysteryStack.pop())
 
-
-
-        # DEBUG
-        print self.discardStack
-        print self.mysteryStack
-
-        print "p1:"
-        print self.p1Rack
-        print "p2:"
-        print self.p2Rack
-
-        print "\n\n\n"
-
-
-
-
         # while neither player has won
-        # while not self.checkWin(self.p1Rack) and not self.checkWin(self.p2Rack):
-        #     self.getMove("player2")
-        #     self.getMove("player1")
+        while not self.checkWin(self.p1Rack) and not self.checkWin(self.p2Rack):
+            # DEBUG
+            print "\nHuman ",
+            print self.p2Rack
 
+            self.getMove("player2")
+
+            # DEUG
+            print "\nAI: ",
+            print self.p1Rack
+
+            self.getMove("player1")
 
     def getMove(self, player_):
 
@@ -73,9 +65,6 @@ class RackoGame(object):
 
         # get choice
         choice = self.discardStack.pop()
-
-        # DEBUG:
-        print "Choice is " + str(choice)
 
         move = player.move(choice, rack)
 

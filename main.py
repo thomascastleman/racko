@@ -6,20 +6,20 @@ def main():
     racko = game.RackoGame()
     racko.start()
 
-    while True:
-        racko.getMove("player2")
-
-        print "\n\np1 rack: ",
-        print racko.getp1Rack()
-
-        print "p2 rack: ",
-        print racko.getp2Rack()
-
-        print "Discard: ",
-        print racko.getDiscard()
-
-        print "Mystery: ",
-        print racko.getMys()
+    # while True:
+    #     racko.getMove("player2")
+    #
+    #     print "\n\np1 rack: ",
+    #     print racko.getp1Rack()
+    #
+    #     print "p2 rack: ",
+    #     print racko.getp2Rack()
+    #
+    #     print "Discard: ",
+    #     print racko.getDiscard()
+    #
+    #     print "Mystery: ",
+    #     print racko.getMys()
 
 
 

@@ -35,7 +35,6 @@ class AI(game.RackoGame):
 
         return move
 
-
     # Scaling Technique:
 
     def scalingTechnique(self, choice, rack):
@@ -89,7 +88,6 @@ class AI(game.RackoGame):
         if index == len(rack):
             index -= 1
         return index
-
 
     # Problem Technique:
 
