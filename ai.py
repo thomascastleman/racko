@@ -51,13 +51,12 @@ class AI(game.RackoGame):
         else:
             return None
 
-
     def searchForStatics(self, rack, beg, prevStatic):
         # for every digit in subsection
         for i in range(beg, len(rack)):
 
             # check criteria
-            if (rack[i] - prevStatic >= i - (beg - 1)) and super(AI, self).getCardMax() - rack[i] > (len(rack) - 1) - i:
+            if (rack[i] - prevStatic >= i - (beg - 1)) and (super(AI, self).getCardMax() + 1) - rack[i] > (len(rack) - 1) - i:
                 # only allow difference in values to be same as difference in indices if that difference is one
                 if not (rack[i] - prevStatic == i - (beg - 1) and i - (beg - 1) != 1):
                     self.current.append(rack[i])
