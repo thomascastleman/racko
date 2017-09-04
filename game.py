@@ -38,6 +38,9 @@ class RackoGame(object):
             self.p1Rack.append(self.mysteryStack.pop())
             self.p2Rack.append(self.mysteryStack.pop())
 
+        # allow AI to perform initial setup
+        self.player1.determineStaticValues(self.p1Rack)
+
 
     def start(self):
 
@@ -121,6 +124,9 @@ class RackoGame(object):
 
     def getCardMax(self):
         return self.cardMax
+
+    def getCardMin(self):
+        return self.cardMin
 
     # DEBUG:
 

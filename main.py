@@ -1,15 +1,16 @@
 
 import game
 
-import debug
+import ai
 
 def main():
 
-    r = [37, 6, 38, 1, 47, 25, 3, 5, 50, 31]
-    statics = debug.determineStaticValues(r)
 
-    print "\n\n"
-    print statics
+    # DEBUG:
+
+    a = ai.AI()
+
+
 
 
     # racko = game.RackoGame()

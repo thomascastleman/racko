@@ -3,14 +3,37 @@ import game
 
 class AI(game.RackoGame):
 
+    possible = []  # all possible sets of statics
+    current = []  # the current set of statics being constructed via our recursive approach
+
+    statics = []    # static values in rack
+
     def __init__(self):
         pass
 
     def move(self, choice, rack):
-        pass
+        return self.findPosition(choice, rack)
 
-    possible = []  # all self.possible sets of statics
-    current = []  # the self.current set of statics being constructed via our recursive approach
+    def findPosition(self, choice, rack):
+        i = 0
+        while i < len(self.statics) and self.statics[i] < choice:
+            i += 1
+
+        min = self.statics[i - 1] if i > 0 else super(AI, self).getCardMin()
+        max = self.statics[i] if i < len(self.statics) else super(AI, self).getCardMax()
+
+        rackIndexOfMin = rack.index(min) if i > 0 else -1
+        rackIndexOfMax = rack.index(max) if i < len(self.statics) else len(rack)
+
+        if min < choice < max and rackIndexOfMax - rackIndexOfMin > 1:
+            self.statics.insert(i, choice)
+
+            scaled = ((choice - min) / (max - min))(rackIndexOfMax - (rackIndexOfMin + 1)) + (rackIndexOfMin + 1)
+
+            return scaled
+        else:
+            return None
+
 
     def searchForStatics(self, rack, beg, prevStatic):
         # for every digit in subsection
@@ -56,7 +79,7 @@ class AI(game.RackoGame):
                 if r > maxRange:
                     maxRange = r
 
-            return optimal[ranges.index(maxRange)]
+            self.statics =  list(optimal[ranges.index(maxRange)])
 
 
 
