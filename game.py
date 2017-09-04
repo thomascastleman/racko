@@ -3,9 +3,11 @@ import random
 
 class RackoGame(object):
 
+    # players
     player1 = None
     player2 = None
 
+    # player racks
     p1Rack = []
     p2Rack = []
 
@@ -40,7 +42,6 @@ class RackoGame(object):
 
         # allow AI to perform initial setup
         self.player1.determineStaticValues(self.p1Rack)
-
 
     def start(self):
 

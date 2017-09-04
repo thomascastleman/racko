@@ -25,10 +25,27 @@ class AI(game.RackoGame):
         rackIndexOfMin = rack.index(min) if i > 0 else -1
         rackIndexOfMax = rack.index(max) if i < len(self.statics) else len(rack)
 
-        if min < choice < max and rackIndexOfMax - rackIndexOfMin > 1:
+        #DEBUG
+        print "Min: ", min
+        print "Max: ", max
+        print "Min index: ", rackIndexOfMin
+        print "Max index: ", rackIndexOfMax
+
+
+
+        if min <= choice <= max and rackIndexOfMax - rackIndexOfMin > 1:
+
+            # DEBUG
+            print choice, " in range between ", min, ", ", max
+
+            print "Scaling from ", min, ", ", max, " to ", rackIndexOfMin + 1, ", ", rackIndexOfMax
+
+
             self.statics.insert(i, choice)
 
-            scaled = ((choice - min) / (max - min))(rackIndexOfMax - (rackIndexOfMin + 1)) + (rackIndexOfMin + 1)
+            scaled = int((float(choice - min) / float(max - min)) * float(rackIndexOfMax - (rackIndexOfMin + 1)) + (rackIndexOfMin + 1))
+            if scaled == rackIndexOfMax:
+                scaled -= 1
 
             return scaled
         else:
@@ -71,15 +88,17 @@ class AI(game.RackoGame):
                     optimal.append(p)
                     ranges.append(rack.index(p[len(p) - 1]) - rack.index(p[0]))
 
-            print optimal
-            print ranges
-
             maxRange = ranges[0]
             for r in ranges:
                 if r > maxRange:
                     maxRange = r
 
             self.statics =  list(optimal[ranges.index(maxRange)])
+
+
+    # DEBUG:
+    def getStatics(self):
+        return self.statics
 
 
 
