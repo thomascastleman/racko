@@ -1,6 +1,5 @@
 
 import game
-
 import ai
 
 def main():
@@ -8,7 +7,7 @@ def main():
 
     # DEBUG:
 
-    rack = [47, 39, 30, 14, 16, 49, 11, 31, 10, 50]
+    rack = [6, 19, 49, 20, 38, 42, 1, 44, 46, 43]
 
     a = ai.AI()
     a.determineStaticValues(rack)
@@ -29,7 +28,7 @@ def main():
             rack[pos] = choice
 
 
-
+    #
     # racko = game.RackoGame()
     # racko.start()
 

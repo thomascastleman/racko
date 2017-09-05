@@ -21,6 +21,7 @@ class RackoGame(object):
 
     def __init__(self):
 
+        # initialize players
         import ai, human
         self.player1 = ai.AI()
         self.player2 = human.Human()
@@ -43,57 +44,44 @@ class RackoGame(object):
         # allow AI to perform initial setup
         self.player1.determineStaticValues(self.p1Rack)
 
+    # initiate rack-o game
     def start(self):
 
         # flip over first card in mystery stack to start
         self.discardStack.append(self.mysteryStack.pop())
 
+        print self.p1Rack
+        print self.player1.getStatics()
+
         # while neither player has won
         while not self.checkWin(self.p1Rack) and not self.checkWin(self.p2Rack):
-            # DEBUG
-            print "\nHuman ",
-            print self.p2Rack
-
             self.getMove("player2")
-
-            # DEUG
-            print "\nAI: ",
-            print self.p1Rack
-
             self.getMove("player1")
 
+            print ""
+            print "AI Rack: ", self.p1Rack
+            print "Human Rack: ", self.p2Rack
+            print ""
+
+    # given player, get move
     def getMove(self, player_):
 
+        # select player and rack
         player = self.player1 if player_ == "player1" else self.player2
         rack = self.p1Rack if player_ == "player1" else self.p2Rack
 
-        # get choice
-        choice = self.discardStack.pop()
+        choice = self.discardStack.pop()    # get choice card
+        move = player.move(choice, rack)    # get player move based on choice
 
-        move = player.move(choice, rack)
-
+        # if player chooses to discard
         if move == None:
+            self.discardStack.append(choice)    # discard choice
 
-            # DEBUG:
-            print "DISCARDING CHOICE"
+            mystery = self.mysteryStack.pop()   # get mystery card
+            move = player.move(mystery, rack)   # get player move based on mystery
 
-            # discard choice
-            self.discardStack.append(choice)
-
-            # get mystery
-            mystery = self.mysteryStack.pop()
-
-            # DEBUG
-            print "Mystery is " + str(mystery)
-
-
-            move = player.move(mystery, rack)
-
+            # if choosing to discard mystery
             if move == None:
-
-                #DEBUG
-                print "DISCARDING MYSTERY"
-
                 # discard
                 self.discardStack.append(mystery)
             else:
@@ -103,39 +91,29 @@ class RackoGame(object):
             # exchange
             rack = self.exchange(choice, move, rack)
 
+        # update actual rack
         if player_ == "player1":
             self.p1Rack = rack
         else:
             self.p2Rack = rack
 
-
-
+    # exchange a card for another at a given index in rack
     def exchange(self, card, index, rack):
-        self.discardStack.append(rack[index])       # discard swapped card from rack
+        self.discardStack.append(rack[index])       # discard card already in rack
         rack[index] = card                          # replace card with choice
         return rack
 
+    # check if rack is in win-state (sorted)
     def checkWin(self, rack):
         if sorted(rack) == rack:
             return True
         else:
             return False
 
-
+    # getters and setters:
 
     def getCardMax(self):
         return self.cardMax
 
     def getCardMin(self):
         return self.cardMin
-
-    # DEBUG:
-
-    def getp1Rack(self):
-        return self.p1Rack
-    def getp2Rack(self):
-        return self.p2Rack
-    def getDiscard(self):
-        return self.discardStack
-    def getMys(self):
-        return self.mysteryStack

@@ -8,7 +8,7 @@ class Human(game.RackoGame):
 
     # returns index in rack of swap player wants to make, or None if pass
     def move(self, choice, rack):
-        print "Available card: " + str(choice)
+        print "\nAvailable card: " + str(choice)
         print "Rack: ",
         print rack
 

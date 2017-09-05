@@ -3,25 +3,37 @@ import game
 
 class AI(game.RackoGame):
 
-    possible = []  # all possible sets of statics
-    current = []  # the current set of statics being constructed via our recursive approach
+    possible = []   # all possible sets of statics
+    current = []    # the current set of statics being constructed via our recursive approach
 
     statics = []    # static values in rack
 
     def __init__(self):
         pass
 
+    # get move given choice and current rack
     def move(self, choice, rack):
         return self.findPosition(choice, rack)
 
+    # find a position in rack to exchange choice based on current rack state and static values
     def findPosition(self, choice, rack):
+
+        # DEBUG
+        print ""
+        print rack
+        print choice
+        print self.statics
+
+        # iterate through statics to find range in which choice fits
         i = 0
         while i < len(self.statics) and self.statics[i] < choice:
             i += 1
 
+        # determine min and max values of range
         min = self.statics[i - 1] if i > 0 else super(AI, self).getCardMin()
         max = self.statics[i] if i < len(self.statics) else super(AI, self).getCardMax()
 
+        # get indices in rack of min and max values, protecting edge cases
         rackIndexOfMin = rack.index(min) if i > 0 else -1
         rackIndexOfMax = rack.index(max) if i < len(self.statics) else len(rack)
 
@@ -31,68 +43,81 @@ class AI(game.RackoGame):
         print "Min index: ", rackIndexOfMin
         print "Max index: ", rackIndexOfMax
 
-
-
+        # if choice value in range and position available in rack (difference in indices greater than one)
         if min <= choice <= max and rackIndexOfMax - rackIndexOfMin > 1:
 
             # DEBUG
             print choice, " in range between ", min, ", ", max
-
             print "Scaling from ", min, ", ", max, " to ", rackIndexOfMin + 1, ", ", rackIndexOfMax
 
-
+            # add choice to static values
             self.statics.insert(i, choice)
 
+            # scale choice from min-max to (index min + 1)-index max
             scaled = int((float(choice - min) / float(max - min)) * float(rackIndexOfMax - (rackIndexOfMin + 1)) + (rackIndexOfMin + 1))
+
+            # if scaled value at max index, decrement
             if scaled == rackIndexOfMax:
                 scaled -= 1
 
             return scaled
         else:
+            # pass card
             return None
 
+    # recursively search for possible sets of initial static values
     def searchForStatics(self, rack, beg, prevStatic):
         # for every digit in subsection
         for i in range(beg, len(rack)):
 
-            # check criteria
-            if (rack[i] - prevStatic >= i - (beg - 1)) and (super(AI, self).getCardMax() + 1) - rack[i] > (len(rack) - 1) - i:
+            # check criteria:
+            # difference between current value and previous static value needs to be > than difference in their indices
+            # similarly, difference between max card value and current value needs to be >= to difference in indices
+            if (rack[i] - prevStatic >= i - (beg - 1)) and super(AI, self).getCardMax() - rack[i] >= (len(rack) - 1) - i:
+
                 # only allow difference in values to be same as difference in indices if that difference is one
                 if not (rack[i] - prevStatic == i - (beg - 1) and i - (beg - 1) != 1):
+                    # add to current set of statics
                     self.current.append(rack[i])
+                    # search subsection from current index to end of array for more possible statics
                     self.searchForStatics(rack, i + 1, rack[i])
 
+        # when end of rack reached, add current set to possible
         self.possible.append(list(self.current))
 
         if len(self.current) > 0:
+            # pop current so as to go back a layer in recursion
             self.current.pop()
 
+    # given initial rack state, determine the optimal set of values to be left unchanged throughout the game
     def determineStaticValues(self, rack):
 
+        # get all possible set of initial static values based on rack
         self.searchForStatics(rack, 0, -1)
 
-        if len(self.possible) > 0:
-            # get max number of values
-            max = len(self.possible[0])
-            for p in self.possible:
-                if len(p) > max:
-                    max = len(p)
+        # get max number of values in a set
+        max = len(self.possible[0])
+        for p in self.possible:
+            if len(p) > max:
+                max = len(p)
 
-            optimal = []
-            ranges = []
+        optimal = []       # sets of maximum length
+        ranges = []        # range of indices in rack covered each set in optimal[]
 
-            # get all statics with max number of values, and calculate index range
-            for p in self.possible:
-                if len(p) == max:
-                    optimal.append(p)
-                    ranges.append(rack.index(p[len(p) - 1]) - rack.index(p[0]))
+        # get all sets with max number of values, and calculate index range
+        for p in self.possible:
+            if len(p) == max:
+                optimal.append(p)
+                ranges.append(rack.index(p[len(p) - 1]) - rack.index(p[0]))
 
-            maxRange = ranges[0]
-            for r in ranges:
-                if r > maxRange:
-                    maxRange = r
+        # choose set of statics with largest range
+        maxRange = ranges[0]
+        for r in ranges:
+            if r > maxRange:
+                maxRange = r
 
-            self.statics =  list(optimal[ranges.index(maxRange)])
+        # update self.statics
+        self.statics =  list(optimal[ranges.index(maxRange)])
 
 
     # DEBUG:
