@@ -7,7 +7,7 @@ def main():
 
     # DEBUG:
 
-    rack = [6, 19, 49, 20, 38, 42, 1, 44, 46, 43]
+    rack = [45, 30, 46, 31, 47, 48, 12, 17, 50, 37]
 
     a = ai.AI()
     a.determineStaticValues(rack)

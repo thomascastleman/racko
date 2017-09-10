@@ -107,8 +107,9 @@ class AI(game.RackoGame):
         # get all sets with max number of values, and calculate index range
         for p in self.possible:
             if len(p) == max:
+                print p, " ", self.getRange(p, rack)
                 optimal.append(p)
-                ranges.append(rack.index(p[len(p) - 1]) - rack.index(p[0]))
+                ranges.append(self.getRange(p, rack))
 
         # choose set of statics with largest range
         maxRange = ranges[0]
@@ -119,10 +120,32 @@ class AI(game.RackoGame):
         # update self.statics
         self.statics =  list(optimal[ranges.index(maxRange)])
 
+    def getRange(self, staticSet, rack):
+        r = 0
+
+        for i in range(0, len(staticSet) + 1):
+            minIndex = -1 if i == 0 else rack.index(staticSet[i - 1])
+            maxIndex = len(rack) if i == len(staticSet) else rack.index(staticSet[i])
+
+            if maxIndex - minIndex > 1:
+                rangeMin = super(AI, self).getCardMin() if i == 0 else staticSet[i - 1]
+                rangeMax = super(AI, self).getCardMax() if i == len(staticSet) else staticSet[i]
+
+                r += rangeMax - (rangeMin + 1)
+
+        return r
+
+
+
+
+
+
 
     # DEBUG:
     def getStatics(self):
         return self.statics
+
+
 
 
 
